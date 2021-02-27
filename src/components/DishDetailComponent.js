@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle  } from 'reactstrap'
 
-class DishDetailComponent extends Component {
 
-    renderComments(comments){
+    function RenderComments({comments}){
         let format = {year : "numeric", month : "short", day : "numeric"}
         if(comments != null){
             return comments.map(comment => (
@@ -18,32 +17,42 @@ class DishDetailComponent extends Component {
             ))
         }
         else{
-            return <div>dsdsdsdsdsdsd</div>
+            return <div></div>
             
         }
     }
 
-    render() {
-        const { dish } = this.props;
+    function RenderDish(props){
+        return (
+            <Card >
+                <CardImg object src = {props.dish.image} alt = {props.dish.name}></CardImg>
+                <CardBody>
+                    <CardTitle>{props.dish.name}</CardTitle>
+                    <CardText>{props.dish.description}</CardText>
+                    </CardBody>
+            </Card>
+        );
+    }
+
+    const DishDetailComponent = (props) => {
+        
         
         return (
             <div className="row">
                 <div className = "col-12 offset-md-1 col-md-4">
-                    <Card >
-                        <CardImg object src = {dish.image} alt = {dish.name}></CardImg>
-                        <CardBody>
-                            <CardTitle>{dish.name}</CardTitle>
-                            <CardText>{dish.description}</CardText>
-                        </CardBody>
-                    </Card>
+                    <RenderDish 
+                        dish = {props.dish}
+                    />
                 </div>
                 <div className="col-12 offset-md-1 col-md-4">
                     <h3>Comments</h3>
-                    {this.renderComments(dish.comments)}
+                    <RenderComments 
+                        comments = {props.dish.comments}
+                    />
                 </div>
             </div>  
         );
     }
-}
+
 
 export default DishDetailComponent;
