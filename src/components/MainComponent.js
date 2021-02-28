@@ -3,7 +3,9 @@ import Menu from './MenuComponent';
 import { DISHES } from "../shared/dishes"; 
 import Details from './DishDetailComponent';
 import Header from "./HeaderComponent";
+import Home from './HomeComponent';
 import Footer from "./FooterComponent";
+import {Switch, Route, Redirect} from 'react-router-dom';
 
 class Main extends Component{
 
@@ -12,42 +14,23 @@ class Main extends Component{
 
     this.state = {
       dishes: DISHES,
-      selectedDish : null
     };
   }
 
   
-  onDishSelect(dish){
-    this.setState({selectedDish: dish})
-  }
-
-    renderDish(dish){
-        
-        if(dish != null){
-            return (
-                <Details dish = {dish} />
-            );
-        }
-        else{
-            return (
-                <div></div>
-            );
-        }
-    }
-
+  
   render()  {
+
+    
     return (
       <div>
           <Header />
-            <div className = "container">
-                <Menu 
-                    dishes = {this.state.dishes}
-                    onClick = {(dish) => this.onDishSelect(dish)}
-                />
-                <br></br>
-                {this.renderDish(this.state.selectedDish)}
-            </div>
-            <Footer />
+          <Switch>
+            <Route path = "/home" component = {() => <Home />} />
+            <Route exact path = "/menu" component = {() => <Menu dishes = {this.state.dishes}/>} />
+            <Redirect to = "/home"/>
+          </Switch>  
+          <Footer />
       </div>
     );
   }
