@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle  } from 'reactstrap'
+import { Card, CardImg, CardText, CardBody, CardTitle  } from 'reactstrap';
+import { Link } from 'react-router-dom'
 
 
     function RenderComments({comments}){
@@ -38,19 +39,32 @@ import { Card, CardImg, CardText, CardBody, CardTitle  } from 'reactstrap'
         
         
         return (
-            <div className="row">
-                <div className = "col-12 offset-md-1 col-md-4">
-                    <RenderDish 
-                        dish = {props.dish}
-                    />
+            <div className = "container">
+                <div class="row">
+                    <ol class="col-12 breadcrumb">
+                        <li class="breadcrumb-item"><Link to = "/home">Home</Link></li>
+                        <li class="breadcrumb-item"><Link to = "/menu">Menu</Link></li>
+                        <li class = "breadcrumb-item active">{props.dish.name}</li>
+                    </ol>
+                    <div class="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>
                 </div>
-                <div className="col-12 offset-md-1 col-md-4">
-                    <h3>Comments</h3>
-                    <RenderComments 
-                        comments = {props.dish.comments}
-                    />
+                <div className="row">
+                    <div className = "col-12 offset-md-1 col-md-4">
+                        <RenderDish 
+                            dish = {props.dish}
+                        />
+                    </div>
+                    <div className="col-12 offset-md-1 col-md-4">
+                        <h3>Comments</h3>
+                        <RenderComments 
+                            comments = {props.comment}
+                        />
+                    </div>
                 </div>
-            </div>  
+            </div>
         );
     }
 
