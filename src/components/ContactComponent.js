@@ -53,7 +53,7 @@ class Contact extends Component {
             error.telnum = 'Tel. number is empty';
         }
         if(!this.state.touched.email){
-            error.email = 'Email is empty';
+            error.email  = 'Email is empty';
         }
 
         if(this.state.touched.firstname && firstname.length < 3){
