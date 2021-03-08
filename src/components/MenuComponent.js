@@ -1,6 +1,5 @@
 import React from 'react';
 import RenderMenuItems from './renderMenuItemsComponent'
-import { BreadcrumbItem, Breadcrumb } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Menu = (props) => {
