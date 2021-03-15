@@ -1,21 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle  } from 'reactstrap';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm';
+
 
 
     function RenderComments({comments}){
         let format = {year : "numeric", month : "short", day : "numeric"}
         if(comments != null){
-            return comments.map(comment => (
-                <ul key = {comment.id} className="list-unstyled">
-                    <li className = "mb-1">
-                        {comment.comment}
-                    </li>
-                    <li className="mb-2">
-                        -- {comment.author}, {new Date(comment.date).toLocaleDateString("en-US", format)}
-                    </li>
-                </ul>
-            ))
+            return <>{comments.map(comment => (
+                
+                    <ul key = {comment.id} className="list-unstyled">
+                        <li className = "mb-1">
+                            {comment.comment}
+                        </li>
+                        <li className="mb-2">
+                            -- {comment.author}, {new Date(comment.date).toLocaleDateString("en-US", format)}
+                        </li>
+                    </ul>
+                    
+                
+            ))}<CommentForm />
+            </>
         }
         else{
             return <div></div>
