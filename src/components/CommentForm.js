@@ -14,6 +14,7 @@ class CommentForm extends Component{
             isModalOpen : false, 
         }
         this.toggleModal = this.toggleModal.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     toggleModal = () =>{
@@ -23,7 +24,8 @@ class CommentForm extends Component{
     }
 
     handleSubmit = (event) =>{
-        alert(JSON.stringify(event))
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, event.rating, event.author, event.comment);
     }
 
     render(){

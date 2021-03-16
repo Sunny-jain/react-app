@@ -5,7 +5,7 @@ import CommentForm from './CommentForm';
 
 
 
-    function RenderComments({comments}){
+    function RenderComments({comments, addComment, dishId}){
         let format = {year : "numeric", month : "short", day : "numeric"}
         if(comments != null){
             return <>{comments.map(comment => (
@@ -20,7 +20,7 @@ import CommentForm from './CommentForm';
                     </ul>
                     
                 
-            ))}<CommentForm />
+            ))}<CommentForm addComment = {addComment} dishId = {dishId}/>
             </>
         }
         else{
@@ -36,14 +36,12 @@ import CommentForm from './CommentForm';
                 <CardBody>
                     <CardTitle>{props.dish.name}</CardTitle>
                     <CardText>{props.dish.description}</CardText>
-                    </CardBody>
+                </CardBody>
             </Card>
         );
     }
 
     const DishDetailComponent = (props) => {
-        
-        
         return (
             <div className = "container">
                 <div class="row">
@@ -67,6 +65,8 @@ import CommentForm from './CommentForm';
                         <h3>Comments</h3>
                         <RenderComments 
                             comments = {props.comment}
+                            addComment = {props.addComment}
+                            dishId = {props.dish.id}
                         />
                     </div>
                 </div>
