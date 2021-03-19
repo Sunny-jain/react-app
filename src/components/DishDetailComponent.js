@@ -63,13 +63,13 @@ import { Loading } from "./LoadingComponent";
         else{
             return (
                 <div className = "container">
-                    <div class="row">
-                        <ol class="col-12 breadcrumb">
-                            <li class="breadcrumb-item"><Link to = "/home">Home</Link></li>
-                            <li class="breadcrumb-item"><Link to = "/menu">Menu</Link></li>
-                            <li class = "breadcrumb-item active">{props.dish.name}</li>
+                    <div className="row">
+                        <ol className="col-12 breadcrumb">
+                            <li className="breadcrumb-item"><Link to = "/home">Home</Link></li>
+                            <li className="breadcrumb-item"><Link to = "/menu">Menu</Link></li>
+                            <li className = "breadcrumb-item active">{props.dish.name}</li>
                         </ol>
-                        <div class="col-12">
+                        <div className="col-12">
                             <h3>{props.dish.name}</h3>
                             <hr />
                         </div>
