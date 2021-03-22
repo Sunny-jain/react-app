@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle  } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
 import { Loading } from "./LoadingComponent";
+import { baseUrl } from '../shared/baseUrl'
 
 
     function RenderComments({comments, addComment, dishId}){
@@ -32,7 +33,7 @@ import { Loading } from "./LoadingComponent";
     function RenderDish(props){
         return (
             <Card >
-                <CardImg object src = {props.dish.image} alt = {props.dish.name}></CardImg>
+                <CardImg object src = {baseUrl + props.dish.image} alt = {props.dish.name}></CardImg>
                 <CardBody>
                     <CardTitle>{props.dish.name}</CardTitle>
                     <CardText>{props.dish.description}</CardText>

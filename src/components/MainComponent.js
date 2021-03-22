@@ -8,7 +8,7 @@ import Footer from "./FooterComponent";
 import About from "./AboutUsComponent";
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
-import { addComment, fetchDishes } from '../redux/actionCreates';
+import { addComment, fetchComments, fetchDishes, fetchPromo } from '../redux/actionCreates';
 import { actions } from "react-redux-form";
 
 
@@ -25,7 +25,9 @@ const mapDispatchToProps = dispatch => ({
   
   addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
   fetchDishes : () => {dispatch(fetchDishes())},
-  resetFeedbackform : () => {dispatch(actions.reset('feedback'))}
+  resetFeedbackform : () => {dispatch(actions.reset('feedback'))},
+  fetchComments : () => {dispatch(fetchComments())},
+  fetchPromo : () => {dispatch(fetchPromo())}
 });
 
 class Main extends Component{
@@ -36,6 +38,8 @@ class Main extends Component{
 
   componentDidMount(){
     this.props.fetchDishes();
+    this.props.fetchPromo();
+    this.props.fetchComments();
   }
   
   render()  {
@@ -45,8 +49,9 @@ class Main extends Component{
         <Details dish = {this.props.dishes.dishes.filter((dish) => dish.id === parseInt(props.match.params.dishId, 10))[0]}
           dishesLoading = {this.props.dishes.isLoading}
           dishesErrMsg = {this.props.dishes.errmsg}
-          comment = {this.props.comments.filter((comment) => comment.dishId === parseInt(props.match.params.dishId, 10))} 
+          comment = {this.props.comments.comments.filter((comment) => comment.dishId === parseInt(props.match.params.dishId, 10))} 
           addComment={this.props.addComment}
+          commentErrMsg = {this.props.comments.errmsg}
         />
       )
     }
@@ -59,8 +64,10 @@ class Main extends Component{
               dish = {this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
               dishesLoading = {this.props.dishes.isLoading}
               dishesErrMsg = {this.props.dishes.errmsg}
-              promotion = {this.props.promotions.filter((promotion) => promotion.featured)[0]}
+              promotion = {this.props.promotions.promotions.filter((promotion) => promotion.featured)[0]}
               leader = {this.props.leaders.filter((leader) => leader.featured)[0]}
+              promoLoading = {this.props.promotions.isLoading}
+              promoErrMsg = {this.props.promotions.errmsg}
               />} />
             <Route exact path = "/menu" component = {() => <Menu dishes = {this.props.dishes}/>} />
             <Route path = "/menu/:dishId" component = {DishWithId} />
