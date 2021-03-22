@@ -13,11 +13,10 @@ export const Comments = (state = {comments : [], errmsg : null}, action) =>{
                 ...state, errmsg : null, comments : action.payload
             }
 
+
         case ActionTypes.Add_Comment:
             var comment = action.payload;
-            comment.id = state.length;
-            comment.date = new Date().toISOString();
-            return state.concat(comment);
+            return {...state, comments : state.comments.concat(comment)};
 
 
         default:

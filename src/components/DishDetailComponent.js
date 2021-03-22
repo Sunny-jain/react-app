@@ -6,7 +6,7 @@ import { Loading } from "./LoadingComponent";
 import { baseUrl } from '../shared/baseUrl'
 
 
-    function RenderComments({comments, addComment, dishId}){
+    function RenderComments({comments, postComment, dishId}){
         let format = {year : "numeric", month : "short", day : "numeric"}
         if(comments != null){
             return <>{comments.map(comment => (
@@ -21,7 +21,7 @@ import { baseUrl } from '../shared/baseUrl'
                     </ul>
                     
                 
-            ))}<CommentForm addComment = {addComment} dishId = {dishId}/>
+            ))}<CommentForm postComment = {postComment} dishId = {dishId}/>
             </>
         }
         else{
@@ -85,7 +85,7 @@ import { baseUrl } from '../shared/baseUrl'
                             <h3>Comments</h3>
                             <RenderComments 
                                 comments = {props.comment}
-                                addComment = {props.addComment}
+                                postComment = {props.postComment}
                                 dishId = {props.dish.id}
                             />
                         </div>
