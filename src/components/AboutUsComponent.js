@@ -1,26 +1,44 @@
 import React from 'react';
 import { Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { Fade, Stagger } from "react-animation-components";
+
 
 function About(props) {
 
     const RenderLeaders = (props) =>{
-        return(
-            <Media tag = "li" className = "p-5" >
-                <Media left>
-                    <Media object src = {props.leader.image} alt = {props.leader.name} />
-                </Media>
-                <Media body className = "ml-5">
-                    <Media heading>
-                        {props.leader.name}
+        if(props.loading){
+            return(
+                <Loading />
+            )
+        }
+        else if(props.errmsg){
+            return(
+                <p>{props.errmsg}</p>
+            )
+        }
+        else{
+            return(
+                <Fade in>
+                    <Media tag = "li" className = "p-5" >
+                        <Media left>
+                            <Media object src = {baseUrl + props.leader.image} alt = {props.leader.name} />
+                        </Media>
+                        <Media body className = "ml-5">
+                            <Media heading>
+                                {props.leader.name}
+                            </Media>
+                            <p>{props.leader.designation}</p>
+                            <p>{props.leader.description}</p>
+                            
+                        </Media>
                     </Media>
-                    <p>{props.leader.designation}</p>
-                    <p>{props.leader.description}</p>
-                    
-                </Media>
-            </Media>
-            
-        )
+                </Fade>
+                
+            )
+        }
     }
     
     return(
@@ -78,11 +96,13 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
-                    {props.leaders.map((leader) =>{
+                    <Stagger in>
+                        {props.leaders.map((leader) =>{
                         return(
                             <RenderLeaders key = {leader.id} leader = {leader}/>
                         )
                     })}
+                    </Stagger>
                 </div>
             </div>
         </div>

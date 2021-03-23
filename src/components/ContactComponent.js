@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Label, Col, Row } from "reactstrap";
-import { Control, Form, Errors, actions } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 import { Link } from 'react-router-dom';
 
 const required = (val) => val && val.length;
@@ -17,9 +17,10 @@ class Contact extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(value){
-        alert(JSON.stringify(value));
+    handleSubmit(values){
+            
         this.props.resetFeedbackform();
+        this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.agree,values.contactType,values.message);
     }
 
 
